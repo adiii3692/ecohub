@@ -10,7 +10,13 @@ const Navbar = ({authenticated}) => {
       <img src='/logo.png' alt="Logo" onClick={()=>{navigate('/')}}/>
       <div onClick={()=>{navigate('/')}}>Home</div>
       <div onClick={()=>{navigate('/about')}}>About</div>
-      {(authenticated)?(<div onClick={()=>{navigate('/logout')}}>Logout</div>):
+      {(authenticated)?
+      (<>
+        <div onClick={()=>{navigate('/shop')}}>Shop</div>
+        <div onClick={()=>{navigate('/logout')}}>Logout</div>
+      </>
+      )
+      :
       (<>
         <div onClick={()=>{navigate('/login')}}>Login</div>
         <div onClick={()=>{navigate('/signup')}}>Signup</div>

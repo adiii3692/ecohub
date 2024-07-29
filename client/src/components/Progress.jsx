@@ -49,7 +49,7 @@ const Progress = ({task}) => {
     useEffect(()=>{console.log(currentProgress)},[currentProgress])
   return (
     <div className='progress'>
-        <span style={{width:percent}}></span>
+        <span style={{width:`${percent}%`}}></span>
     </div>
   )
 }

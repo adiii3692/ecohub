@@ -80,7 +80,7 @@ const Signup = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="wrapper-border bg-transparent text-white px-4 py-2 w-full rounded-full"
+            className="wrapper-border bg-transparent px-4 py-2 w-full rounded-full"
           />
         </div>
         <div className="my-4 p-white">

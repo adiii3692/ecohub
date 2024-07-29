@@ -5,6 +5,7 @@ import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Logout from './components/Logout.jsx';
 import About from './components/About.jsx';
+import Shop from './components/Shop.jsx';
 
 const App = () => {
 
@@ -30,6 +31,7 @@ const App = () => {
       <Route path='/signup' element={<Signup/>}></Route>
       <Route path='/logout' element={<Logout/>}></Route>
       <Route path='/about' element={<About/>}></Route>
+      <Route path='/shop' element={<Shop/>}></Route>
     </Routes>
     
   )
