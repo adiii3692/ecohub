@@ -224,7 +224,28 @@ router.get('/details/:person',async(request,response)=>{
         const person = request.params.person;
         const personDetails = await pool.query('SELECT * FROM person WHERE id=$1',[person]);
 
+        if ((!personDetails)||(personDetails.rows.length==0)){
+            return response.json({message:"User does not exist"});
+        }
+
         return response.status(200).send({message:"Got user details",personDetails:personDetails.rows[0]});
+    } catch (error) {
+        console.log(error.message);
+        return response.status(500).send({ message: error.message });
+    }
+});
+
+//Route to get the tickets/trophies of a user
+router.get('/tickets/:person',async(request,response)=>{
+    try {
+        const userId = request.params.person;
+        const userTickets = await pool.query('SELECT * FROM trophies WHERE person_id=$1',[userId]);
+
+        if ((!userTickets)||(userTickets.rows.length==0)){
+            return response.json({message:"User does not have any tickets",userTickets:0});
+        }
+
+        return response.status(200).json({message:"Found number of tickets",userTickets:userTickets.rows[0].amount});
     } catch (error) {
         console.log(error.message);
         return response.status(500).send({ message: error.message });

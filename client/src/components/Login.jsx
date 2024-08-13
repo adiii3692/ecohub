@@ -67,21 +67,6 @@ const Login = () => {
         checkLoggedIn();
     })
   return (
-    // <div className='flex flex-col h-full'>
-    //     <Navbar authenticated={authenticated}/>
-    //     <div className='flex justify-center items-center'>Login</div>
-    //     <div className='flex flex-col'>
-    //         <div className='flex justify-center'>
-    //             <input type='text' value={username} placeholder='Username' onChange={(e)=>setUsername(e.target.value)}></input>
-    //         </div>
-    //         <div className='flex justify-center'>
-    //             <input type='text' value={password} placeholder='Password' onChange={(e)=>setPassword(e.target.value)}></input>
-    //         </div>
-    //         <div className='flex justify-center'>
-    //             <button onClick={logUser}>Login</button>
-    //         </div>
-    //     </div>
-    // </div>
 
     <div className="flex flex-col h-full">
       <Navbar authenticated={authenticated}/>
