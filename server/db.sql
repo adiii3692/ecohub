@@ -8,8 +8,8 @@ CREATE TABLE person(
 
 CREATE TABLE challenge(
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255)),
-    max_progress INT;
+    title VARCHAR(255),
+    max_progress INT);
 
 CREATE TABLE progress(
     id SERIAL PRIMARY KEY,
@@ -36,6 +36,11 @@ CREATE TABLE products(
 
 -- Create challenges
 INSERT INTO challenge(title,max_progress) VALUES('Compost Challenge',7);
+INSERT INTO challenge(title,max_progress) VALUES('Energy Saving Challenge',7);
+INSERT INTO challenge(title,max_progress) VALUES('Plastic Free Month',30);
+INSERT INTO challenge(title,max_progress) VALUES('Tree Planting Challenge',7);
+INSERT INTO challenge(title,max_progress) VALUES('Zero Waste Week',7);
+INSERT INTO challenge(title,max_progress) VALUES('Water Conservation Challenge',7);
 
 -- Create products
 INSERT INTO products(title,price) VALUES('Luxury Watch',5);
