@@ -31,8 +31,7 @@ CREATE TABLE trophies(
 CREATE TABLE products(
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
-    price INT,
-    stock INT);
+    price INT);
 
 -- Create challenges
 INSERT INTO challenge(title,max_progress) VALUES('Compost Challenge',7);
