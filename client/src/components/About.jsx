@@ -24,7 +24,7 @@ const About = () => {
     <div className="About">
       <Navbar authenticated={authenticated}/>
       <div className="content">
-        <img src='/banner.png' id="background-image" alt="Background" />
+        <img data-test="bgimg" src='/banner.png' id="background-image" alt="Background" />
         <div id="text-container">
           <h1 id="title">EcoHub</h1>
           <div id="intro">
@@ -42,7 +42,7 @@ const About = () => {
             can then be traded in for items in the shop.
           </p>
         </div>
-        <img src='/people.png' id="people-image" alt="People participating" />
+        <img data-test="peopleimg" src='/people.png' id="people-image" alt="People participating" />
       </div>
     </div>
   )

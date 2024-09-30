@@ -70,12 +70,13 @@ const Login = () => {
 
     <div className="flex flex-col h-full">
       <Navbar authenticated={authenticated}/>
-      <div className="flex flex-col rounded-xl w-[400px] my-8 p-4 mx-auto bg-transparent blur-bg bg-shadow">
+      <div data-test="login-form" className="flex flex-col rounded-xl w-[400px] my-8 p-4 mx-auto bg-transparent blur-bg bg-shadow">
         <div className="p-4 flex justify-center">
           <h1 className="text-3xl font-bold">Login</h1>
         </div>
         <div className="my-4 p-white">
           <input
+            data-test="username"
             type="text"
             placeholder="Username"
             value={username}
@@ -85,6 +86,7 @@ const Login = () => {
         </div>
         <div className="my-4 p-white">
           <input
+            data-test="password"
             type="password"
             value={password}
             placeholder="Password"

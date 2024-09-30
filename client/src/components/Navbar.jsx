@@ -6,7 +6,7 @@ const Navbar = ({authenticated}) => {
     const navigate = useNavigate();
 
   return (
-    <div className="navbar">
+    <div data-test="navbar" className="navbar">
       <img src='/logo.png' alt="Logo" onClick={()=>{navigate('/')}}/>
       <div onClick={()=>{navigate('/')}}>Home</div>
       <div onClick={()=>{navigate('/about')}}>About</div>
