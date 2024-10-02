@@ -86,7 +86,7 @@ const Shop = () => {
     }
 
     const getImage = (title)=>{
-      if (title.includes('Shirt')) return tshirt;
+      if (title.includes('Clothing')) return tshirt;
       if (title.includes('Wallet')) return wallet;
       if (title.includes('Perfume')) return purfume;
       if (title.includes('Shoes')) return shoes;
