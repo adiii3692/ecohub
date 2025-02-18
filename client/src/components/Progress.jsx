@@ -12,7 +12,7 @@ const Progress = ({task}) => {
         const person_id = localStorage.getItem('person_id');
         const task_id = task.id;
         
-        axios.get(`http://localhost:5555/progress/${person_id}/${task_id}`)
+        axios.get(`${import.meta.env.VITE_BASE_URL}progress/${person_id}/${task_id}`)
         .then((response)=>{
             if ((!response.data.progress)||(response.data.progress.length==0)){
                 setProgress(0);

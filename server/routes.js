@@ -20,7 +20,9 @@ router.post('/signup',async(request,response)=>{
 
         //Verify email
         const email = request.body.email;
+        console.log('Gonna run query');
         const replicaMail = await pool.query('SELECT * FROM person WHERE email=$1',[email]);
+        console.log('Query run');
         if (replicaMail.rows.length!=0){
             return response.json({message:"Enter a unique email",validated:false});
         }

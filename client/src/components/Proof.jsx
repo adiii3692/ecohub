@@ -27,7 +27,7 @@ const Proof = ({task}) => {
         binary:image
     }
     const uploadProof = ()=>{
-        axios.post(`http://localhost:5555/upload/${personId}/${challengeId}`,proof)
+        axios.post(`${import.meta.env.VITE_BASE_URL}upload/${personId}/${challengeId}`,proof)
         .then((response)=>{
             notify(response);
             navigate('/');

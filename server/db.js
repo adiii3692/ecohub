@@ -4,9 +4,18 @@ const Pool = require('pg').Pool;
 require('dotenv').config();
 
 export const pool = new Pool({
-    user:"postgres",
-    password:process.env.pwd,
-    host:'localhost',
-    port:5432,
-    database:'ecohub'
+    connectionString: process.env.DB_URL,
+    ssl:{
+        rejectUnauthorized: false
+    }
 });
+
+export const testConnection = async () => {
+    try {
+      const client = await pool.connect();
+      console.log("Connected to PostgreSQL!");
+      client.release();
+    } catch (err) {
+      console.error("Error connecting to the database:", err);
+    }
+  };

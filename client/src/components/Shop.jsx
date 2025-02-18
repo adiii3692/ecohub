@@ -32,7 +32,7 @@ const Shop = () => {
     };
 
     const getProducts = ()=>{
-      axios.get(`http://localhost:5555/products`)
+      axios.get(`${import.meta.env.VITE_BASE_URL}products`)
       .then((response)=>{
         setProducts(response.data.products);
         console.log(response.data.products);
@@ -59,7 +59,7 @@ const Shop = () => {
     }
 
     const getTickets = ()=>{
-      axios.get(`http://localhost:5555/tickets/${localStorage.getItem('person_id')}`)
+      axios.get(`${import.meta.env.VITE_BASE_URL}tickets/${localStorage.getItem('person_id')}`)
       .then((response)=>{
         setTickets(response.data.userTickets);
         console.log('Tickets: '+response.data.userTickets)

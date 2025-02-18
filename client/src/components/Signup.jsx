@@ -19,7 +19,7 @@ const Signup = () => {
             password: password
         };
 
-        axios.post(`http://localhost:5555/signup`,user)
+        axios.post(`${import.meta.env.VITE_BASE_URL}signup`,user)
         .then((response)=>{
             if (response.data.validated){
                 notify(response);

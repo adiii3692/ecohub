@@ -9,7 +9,7 @@ const Challenges = () => {
 
   //Get challenges
   const getChallenges = ()=>{
-    axios.get(`http://localhost:5555/challenge`)
+    axios.get(`${import.meta.env.VITE_BASE_URL}challenge`)
     .then((response)=>{
         setChallenge(response.data.challenges);
     })

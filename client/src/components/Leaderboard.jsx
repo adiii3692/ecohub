@@ -7,7 +7,7 @@ const Leaderboard = () => {
     const [leaderboard,setLeaderboard] = useState([]);
 
     const getLeaderboard = ()=>{
-        axios.get(`http://localhost:5555/leaderboard`)
+        axios.get(`${import.meta.env.VITE_BASE_URL}leaderboard`)
         .then((response)=>{
             if (!(response.data.leaderboard)){
                 console.log('Could not load leaderboard');

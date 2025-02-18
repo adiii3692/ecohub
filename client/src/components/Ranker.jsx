@@ -7,7 +7,7 @@ const Ranker = ({ranker,index}) => {
     const [username,setUsername] = useState('');
     
     const getPersonDetails = ()=>{
-        axios.get(`http://localhost:5555/details/${ranker.person_id}`)
+        axios.get(`${import.meta.env.VITE_BASE_URL}details/${ranker.person_id}`)
         .then((response)=>{
             setUsername(response.data.personDetails.username);
         })

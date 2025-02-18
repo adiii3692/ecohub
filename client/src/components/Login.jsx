@@ -18,7 +18,7 @@ const Login = () => {
             password: password
         }
 
-        axios.post(`http://localhost:5555/login`,user)
+        axios.post(`${import.meta.env.VITE_BASE_URL}login`,user)
         .then((response)=>{
             if (response.data.validated){
                 notify(response);
