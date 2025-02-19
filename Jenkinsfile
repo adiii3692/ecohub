@@ -49,12 +49,9 @@ pipeline {
             }
         } 
 
-        stage('Install Dependencies and Run Cypress Tests'){
+        stage('Run Cypress Tests'){
             steps {
-                dir('client/'){
-                     sh 'docker pull cypress/included:latest'
-                     sh 'docker run --link $(docker ps -qf "name=ecohub-frontend") -v \$(pwd)/cypress/e2e:/e2e -w /e2e cypress/included:latest'
-                }
+                sh 'docker compose run --rm cypress'
             }
         }
     }

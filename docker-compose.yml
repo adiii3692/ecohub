@@ -21,12 +21,12 @@ services:
       - ecohub-network
   
   cypress:
-    image: cypress/included:latest
+    image: cypress/base:latest
     container_name: cypress
     networks:
       - ecohub-network
     volumes:
-      - ./client/cypress/e2e:/e2e
+      - ./client/cypress:/e2e
     working_dir: /e2e
     entrypoint: ["npx", "cypress", "run"]
     depends_on:
