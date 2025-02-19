@@ -11,11 +11,6 @@ pipeline {
     }
 
     stages {
-        stage('Install npm'){
-            steps{
-                sh 'npm i'
-            }
-        }
 
         stage('Clone Repository') {
             steps {
@@ -54,9 +49,10 @@ pipeline {
             }
         } 
 
-        stage('Run Cypress Tests'){
+        stage('Install npm and Run Cypress Tests'){
             steps {
                 dir('client/'){
+                    sh 'npm i'
                     sh 'npm -v'
                     sh 'npm run cypress'
                 }
