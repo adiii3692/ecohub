@@ -6,7 +6,16 @@ pipeline {
         PORT = credentials('PORT')
     }
 
+    tools{
+        nodejs "nodejs"
+    }
+
     stages {
+        stage('Install npm'){
+            steps{
+                sh 'npm i'
+            }
+        }
 
         stage('Clone Repository') {
             steps {
