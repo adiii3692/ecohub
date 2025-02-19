@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/your-project.git'
+                git 'https://github.com/adiii3692/ecohub.git'
             }
         }
 
