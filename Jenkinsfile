@@ -10,6 +10,13 @@ pipeline {
     }
 
     stages {
+        stage('Check Credentials') {
+            steps {
+                sh 'echo ${DB_URL}'
+                sh 'echo ${PORT}'
+            }
+        }
+
         stage('Clone Repository') {
             steps {
                 git 'https://github.com/adiii3692/ecohub.git'
