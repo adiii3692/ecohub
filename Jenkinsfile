@@ -25,13 +25,13 @@ pipeline {
 
         stage('Check Backend Container') {
             steps {
-                sh 'docker compose logs ecohub-backend'
+                sh 'docker logs $(docker ps -qf "name=ecohub-backend")'
             }
         }
 
         stage('Check Frontend Container') {
             steps {
-                sh 'docker compose logs ecohub-frontend'
+                sh 'docker logs $(docker ps -qf "name=ecohub-frontend")'
             }
         } 
     }
