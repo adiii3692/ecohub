@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DB_URL = credentials('DB_URL_SECRET')
+        DB_URL = credentials('DB_URL')
         PORT = credentials('PORT')
     }
 
@@ -19,7 +19,7 @@ pipeline {
                 dir('server/'){
                     sh 'touch .env'
                     sh 'echo "DB_URL=${DB_URL}" > .env'
-                    sh 'echo "PORT=${PORT}" > .env'
+                    sh 'echo "PORT=${PORT}" >> .env'
                     sh 'ls'
                     sh 'cat .env'
                 }
