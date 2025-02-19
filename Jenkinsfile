@@ -46,5 +46,12 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Vercel') {
+            steps {
+                sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+            }
+        }
+        
     }
 }
