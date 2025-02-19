@@ -49,11 +49,11 @@ pipeline {
             }
         } 
 
-        stage('Install npm and Run Cypress Tests'){
+        stage('Install Dependencies and Run Cypress Tests'){
             steps {
                 dir('client/'){
                     sh 'npm i'
-                    sh 'npm -v'
+                    sh 'apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
                     sh 'npm run cypress'
                 }
             }
