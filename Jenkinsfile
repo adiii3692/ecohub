@@ -54,7 +54,7 @@ pipeline {
                 dir('client/'){
                      sh 'docker pull cypress/included:latest'
                     sh """
-                        docker run -it \
+                        docker run \
                         --link ecohub-frontend \
                         -v \$(pwd)/cypress/e2e:/e2e \
                         -w /e2e \
