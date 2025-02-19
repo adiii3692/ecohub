@@ -18,8 +18,8 @@ pipeline {
 
         stage('Build And Run Docker Images') {
             steps {
-                sh 'ls'
-                sh 'docker-compose up --build -d'
+                sh 'docker version'
+                sh 'sudo docker compose up --build -d'
             }
         }
     }
