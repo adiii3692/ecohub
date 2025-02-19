@@ -47,16 +47,22 @@ pipeline {
             }
         }
 
+        stage('Build Vercel Image') {
+            steps{
+                sh 'sudo docker build -t vercel .'
+                sh 'docker image ls'
+            }
+        }
+
         stage('Deploy to Vercel') {
             agent{
                 docker{
-                    image 'node:23-alpine'
+                    image 'vercel'
                     reuseNode true
                 }
             }
             steps {
                 dir('client/'){
-                    sh 'npm install -g vercel'
                     sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
                 }
             }
