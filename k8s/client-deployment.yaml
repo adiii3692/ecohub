@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-client-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: react-client
+  template:
+    metadata:
+      labels:
+        app: react-client
+    spec:
+      containers:
+        - name: react-client
+          image: react-client:latest   
+          ports:
+            - containerPort: 5173
