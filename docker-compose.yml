@@ -3,9 +3,8 @@ services:
     build: ./server
     ports:
       - "5555:5555"
-    environment:
-      - DB_URL = ${DB_URL}
-      - PORT = ${PORT}
+    env_file:
+      - ./server/.env
   
   frontend:
     build:

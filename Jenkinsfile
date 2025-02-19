@@ -10,12 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('Check Credentials') {
-            steps {
-                sh 'echo ${CLIENT_IMAGE}'
-                sh 'echo ${PORT}'
-            }
-        }
 
         stage('Clone Repository') {
             steps {
@@ -23,9 +17,22 @@ pipeline {
             }
         }
 
+        stage('Create an Env File') {
+            steps {
+                dir('ecohub/server/'){
+                    sh '''
+                    echo "DB_URL=${DB_URL}" > .env
+                    echo "PORT=${PORT}" > .env
+                    ls
+                    cat .env
+                    '''
+                }
+            }
+        }
+
         stage('Build And Run Docker Images') {
             steps {
-                sh 'DB_URL=${DB_URL} PORT=${PORT} docker compose up --build -d'
+                sh 'docker compose up --build -d'
                 sh 'docker compose ps'
             }
         }
