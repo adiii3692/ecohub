@@ -17,3 +17,21 @@ services:
       - backend
     environment:
       - VITE_BASE_URL=http://localhost:5555/
+    networks:
+      - ecohub-network
+  
+  cypress:
+    image: cypress/included:latest
+    container_name: cypress
+    networks:
+      - ecohub-network
+    volumes:
+      - ./client/cypress/e2e:/e2e
+    working_dir: /e2e
+    entrypoint: ["npx", "cypress", "run"]
+    depends_on:
+      - frontend
+
+networks:
+  ecohub-network:
+    driver: bridge
