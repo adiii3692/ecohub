@@ -20,6 +20,7 @@ pipeline {
         stage('Create an Env File') {
             steps {
                 dir('server/'){
+                    sh 'touch .env'
                     sh 'echo "DB_URL=${DB_URL}" > .env'
                     sh 'echo "PORT=${PORT}" > .env'
                     sh 'ls'
