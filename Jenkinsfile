@@ -52,9 +52,14 @@ pipeline {
         stage('Install Dependencies and Run Cypress Tests'){
             steps {
                 dir('client/'){
-                    sh 'npm i'
-                    sh 'sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
-                    sh 'npm run cypress'
+                     sh 'docker pull cypress/included:latest'
+                    sh """
+                        docker run -it \
+                        --link ecohub-frontend \
+                        -v \$(pwd)/cypress/e2e:/e2e \
+                        -w /e2e \
+                        cypress/included:latest
+                    """
                 }
             }
         }
