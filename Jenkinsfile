@@ -2,10 +2,7 @@ pipeline {
     agent any
 
     environment {
-        CLIENT_IMAGE = "ecohub_frontend:latest"
-        SERVER_IMAGE = "ecohub_backend:latest"
-        COMPOSE_FILE = "docker-compose.yml"
-        DB_URL = credentials('DB_URL')
+        DB_URL = credentials('DB_URL_SECRET')
         PORT = credentials('PORT')
     }
 
