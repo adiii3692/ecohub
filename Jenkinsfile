@@ -51,7 +51,7 @@ pipeline {
 
         stage('Run Cypress Tests'){
             steps {
-                sh 'sleep 10'
+                sh 'curl http://localhost:5173/'
                 sh 'docker compose run --rm cypress'
             }
         }
