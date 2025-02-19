@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Check Credentials') {
             steps {
-                sh 'echo ${DB_URL}'
+                sh 'echo ${CLIENT_IMAGE}'
                 sh 'echo ${PORT}'
             }
         }
