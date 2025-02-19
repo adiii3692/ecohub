@@ -21,7 +21,7 @@ services:
       - ecohub-network
   
   cypress:
-    image: cypress/base:latest
+    image: cypress/included:latest
     container_name: cypress
     networks:
       - ecohub-network

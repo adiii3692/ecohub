@@ -1,7 +1,7 @@
-export default defineConfig({
+module.exports = {
   e2e: {
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
-    },
+    baseUrl: 'http://localhost:5173/',
+
+    specPattern: 'cypress/e2e/**/*.{js,ts}',
   },
-});
+};
