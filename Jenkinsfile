@@ -4,6 +4,7 @@ pipeline {
     environment {
         DB_URL = credentials('DB_URL')
         PORT = credentials('PORT')
+        VERCEL_TOKEN = credentials('VERCEL_TOKEN')
     }
 
     tools{
@@ -30,36 +31,19 @@ pipeline {
             }
         }
 
-        stage('Build And Run Docker Images') {
-            steps {
-                sh 'docker compose up --build -d'
-                sh 'docker compose ps'
+        stage('Build and Install Frontend'){
+            agent{
+                docker{
+                    image 'node:23-alpine'
+                    reuseNode true
+                }
+            }
+            steps{
+                dir('client/'){
+                    sh 'npm ci'
+                    sh 'npm run build'
+                    sh 'ls -la'
+                }
             }
         }
-
-        stage('Check Backend Container') {
-            steps {
-                sh 'docker logs $(docker ps -qf "name=ecohub-backend")'
-            }
-        }
-
-        stage('Check Frontend Container') {
-            steps {
-                sh 'docker logs $(docker ps -qf "name=ecohub-frontend")'
-            }
-        } 
-
-        stage('Run Cypress Tests'){
-            steps {
-                sh 'curl http://ecohub-frontend:5173/'
-                sh 'docker compose run --rm cypress'
-            }
-        }
-    }
-
-    post {
-        always {
-            sh 'docker compose down -v'
-        }
-    }
 }
