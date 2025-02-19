@@ -16,21 +16,10 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Build And Run Docker Images') {
             steps {
-                sh 'docker-compose build'
-            }
-        }
-
-        stage('Start Containers') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
-
-        stage('Stop and Cleanup') {
-            steps {
-                sh 'docker-compose down'
+                sh 'ls'
+                sh 'docker-compose up --build -d'
             }
         }
     }
