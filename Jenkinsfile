@@ -48,6 +48,7 @@ pipeline {
         stage('Run Cypress Tests'){
             steps {
                 dir('client/'){
+                    sh 'npm -v'
                     sh 'npm run cypress'
                 }
             }
