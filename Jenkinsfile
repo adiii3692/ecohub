@@ -19,7 +19,7 @@ pipeline {
 
         stage('Create an Env File') {
             steps {
-                dir('ecohub/server/'){
+                dir('server/'){
                     sh '''
                     echo "DB_URL=${DB_URL}" > .env
                     echo "PORT=${PORT}" > .env
