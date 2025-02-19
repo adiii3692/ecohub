@@ -1,6 +1,6 @@
 module.exports = {
   e2e: {
-    baseUrl: 'http://localhost:5173/',
+    baseUrl: 'http://ecohub-frontend:5173/',
     specPattern: 'cypress/e2e/**/*.{js,ts}',
     supportFile: false
   },

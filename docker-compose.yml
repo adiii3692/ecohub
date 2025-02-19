@@ -23,14 +23,15 @@ services:
   cypress:
     image: cypress/included:latest
     container_name: cypress
+    depends_on:
+      - frontend
     networks:
       - ecohub-network
     volumes:
       - ./client/cypress:/e2e
     working_dir: /e2e
     entrypoint: ["npx", "cypress", "run"]
-    depends_on:
-      - frontend
+    
 
 networks:
   ecohub-network:
