@@ -51,6 +51,7 @@ pipeline {
 
         stage('Run Cypress Tests'){
             steps {
+                sh 'sleep 10'
                 sh 'docker compose run --rm cypress'
             }
         }
