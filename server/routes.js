@@ -3,7 +3,7 @@ import { pool } from './db.js';
 import {createRequire} from 'module';
 const require = createRequire(import.meta.url);
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 const salt = bcrypt.genSaltSync(parseInt(process.env.saltRound));

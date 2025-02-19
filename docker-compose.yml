@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ./server
+    ports:
+      - "5555:5555"
+    env_file:
+      - ./server/.env
+  
+  frontend:
+    build:
+      context: ./client
+      args:
+        VITE_BASE_URL: "http://localhost:5555/"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      - VITE_BASE_URL=http://localhost:5555/

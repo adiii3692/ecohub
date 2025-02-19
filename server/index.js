@@ -11,14 +11,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 //Cors
-const allowedOrigins = ['https://bug-free-trout-6qw6wwq9x79cxgx-5173.app.github.dev'];
-const corsOptions = {
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    preflightContinue: false,  // Preflight request should end without further processing
-    optionsSuccessStatus: 204 // Status code for successful preflight response
-  };
-app.use(cors(corsOptions));
+app.use(cors());
 //Bodyparser middleware
 app.use(bodyParser.json({limit:'5mb'}));
 
