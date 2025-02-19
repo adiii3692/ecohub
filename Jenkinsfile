@@ -19,14 +19,14 @@ pipeline {
         stage('Build And Run Docker Images') {
             steps {
                 sh 'docker version'
-                sh 'sudo docker compose up --build -d'
+                sh 'docker compose up --build -d'
             }
         }
     }
 
     post {
         always {
-            sh 'docker-compose down -v'
+            sh 'docker compose down -v'
         }
         failure {
             echo "Build or Cypress tests failed!"
