@@ -1,7 +1,7 @@
 FROM node:23-alpine
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm i
+RUN npm ci
 COPY . .
 
 ARG VITE_BASE_URL

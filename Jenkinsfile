@@ -18,10 +18,22 @@ pipeline {
 
         stage('Build And Run Docker Images') {
             steps {
-                sh 'docker version'
                 sh 'docker compose up --build -d'
+                sh 'docker compose ps'
             }
         }
+
+        stage('Check Backend Container') {
+            steps {
+                sh 'docker compose logs ecohub-backend'
+            }
+        }
+
+        stage('Check Frontend Container') {
+            steps {
+                sh 'docker compose logs ecohub-frontend'
+            }
+        } 
     }
 
     post {
@@ -29,7 +41,7 @@ pipeline {
             sh 'docker compose down -v'
         }
         failure {
-            echo "Build or Cypress tests failed!"
+            echo "Build failed!"
         }
     }
 }
