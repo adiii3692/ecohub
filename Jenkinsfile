@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build And Run Docker Images') {
             steps {
-                sh 'docker compose up --build -d'
+                sh 'docker compose up --build -d -e DB_URL=${DB_URL} PORT=${PORT}'
                 sh 'docker compose ps'
             }
         }
