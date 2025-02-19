@@ -55,8 +55,10 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm install vercel'
-                sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+                dir('client/'){
+                    sh 'npm install -g vercel'
+                    sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+                }
             }
         }
         
