@@ -44,14 +44,19 @@ pipeline {
                 sh 'docker logs $(docker ps -qf "name=ecohub-frontend")'
             }
         } 
+
+        stage('Run Cypress Tests'){
+            steps {
+                dir('client/'){
+                    sh 'npx cypress run'
+                }
+            }
+        }
     }
 
     post {
         always {
             sh 'docker compose down -v'
-        }
-        failure {
-            echo "Build failed!"
         }
     }
 }
