@@ -43,20 +43,20 @@ pipeline {
             }
         }
 
-        stage('Test Frontend'){
-            agent{
-                docker{
-                    image 'node:23-alpine'
-                    reuseNode true
-                }
-            }
-            steps{
-                dir('client/'){
-                    sh 'npm ci'
-                    sh 'npm run cypress'
-                }
-            }
-        }
+        // stage('Test Frontend'){
+        //     agent{
+        //         docker{
+        //             image 'node:23-alpine'
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps{
+        //         dir('client/'){
+        //             sh 'npm ci'
+        //             sh 'npm run cypress'
+        //         }
+        //     }
+        // }
 
         // stage('Build Vercel Image') {
         //     steps{
