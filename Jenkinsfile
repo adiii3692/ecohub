@@ -7,10 +7,6 @@ pipeline {
         VERCEL_TOKEN = credentials('VERCEL_TOKEN')
     }
 
-    tools{
-        nodejs "nodejs"
-    }
-
     stages {
 
         stage('Clone Repository') {
