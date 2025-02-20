@@ -61,6 +61,7 @@ pipeline {
                 dir('client/'){
                     // sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
                     sh 'vercel --version'
+                    sh 'vercel --token ${VERCEL_TOKEN} --prod --confirm --project ecohub --org wanpo --cwd ./'
                 }
             }
         }
