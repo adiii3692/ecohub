@@ -50,19 +50,20 @@ pipeline {
             }
         }
 
-        // stage('Deploy to Vercel') {
-        //     agent{
-        //         docker{
-        //             image 'vercel'
-        //             reuseNode true
-        //         }
-        //     }
-        //     steps {
-        //         dir('client/'){
-        //             sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
-        //         }
-        //     }
-        // }
+        stage('Deploy to Vercel') {
+            agent{
+                docker{
+                    image 'vercel'
+                    reuseNode true
+                }
+            }
+            steps {
+                dir('client/'){
+                    // sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+                    sh 'vercel --version'
+                }
+            }
+        }
         
     }
 }
