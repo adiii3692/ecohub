@@ -47,26 +47,41 @@ pipeline {
             }
         }
 
-        stage('Build Vercel Image') {
-            steps{
-                sh 'sudo docker build -t vercel .'
-                sh 'docker image ls'
-            }
-        }
-
-        stage('Deploy to Vercel') {
+        stage('Test Frontend'){
             agent{
                 docker{
-                    image 'vercel'
+                    image 'node:23-alpine'
                     reuseNode true
                 }
             }
-            steps {
+            steps{
                 dir('client/'){
-                    sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+                    sh 'npm ci'
+                    sh 'npm run cypress'
                 }
             }
         }
+
+        // stage('Build Vercel Image') {
+        //     steps{
+        //         sh 'sudo docker build -t vercel .'
+        //         sh 'docker image ls'
+        //     }
+        // }
+
+        // stage('Deploy to Vercel') {
+        //     agent{
+        //         docker{
+        //             image 'vercel'
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps {
+        //         dir('client/'){
+        //             sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
+        //         }
+        //     }
+        // }
         
     }
 }
