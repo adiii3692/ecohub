@@ -67,5 +67,19 @@ pipeline {
             }
         }
         
+        stage('Build and Run Backend'){
+            agent{
+                docker{
+                    image 'node:23-alpine'
+                    reuseNode true
+                }
+            }
+            steps{
+                dir('server/'){
+                    sh 'npm i'
+                    sh 'npm run dev'
+                }
+            }
+        }
     }
 }
