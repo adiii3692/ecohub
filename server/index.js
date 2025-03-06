@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express')
 import cors from 'cors';
 import {createRequire} from 'module';
 const require = createRequire(import.meta.url);
@@ -25,3 +25,5 @@ app.get('/',(request,response)=>{
 })
 
 app.use('/',routes);
+
+module.exports = app
