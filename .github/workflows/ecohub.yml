@@ -32,6 +32,6 @@ jobs:
       
       - name: Test API endpoints
         env:
-          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          DB_URL: ${{secrets.DATABASE_URL}}
           PORT: ${{secrets.PORT}}
         run: npm test
