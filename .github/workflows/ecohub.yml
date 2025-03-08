@@ -11,18 +11,18 @@ on:
 jobs:
   run-jenkinsfile:
     name: Run Jenkins File
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jenkinsci/jenkinsfile-runner:master
+      image: ghcr.io/jenkinsci/jenkinsfile-runner:latest
     environment: prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: 23
+          node-version: 18
 
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
