@@ -59,7 +59,6 @@ pipeline {
             }
             steps {
                 dir('client/'){
-                    // sh 'vercel deploy --prod --token ${VERCEL_TOKEN} --project ecohub --org wanpo'
                     sh 'vercel --version'
                     sh 'vercel pull --token $VERCEL_TOKEN --yes'
                     sh 'vercel deploy --token ${VERCEL_TOKEN} --prod --confirm --cwd ./'
@@ -67,7 +66,7 @@ pipeline {
             }
         }
         
-        stage('Build and Run Backend'){
+        stage('Build and Test Backend'){
             agent{
                 docker{
                     image 'node:23-alpine'
@@ -77,7 +76,7 @@ pipeline {
             steps{
                 dir('server/'){
                     sh 'npm i'
-                    sh 'npm run dev'
+                    sh 'npm test'
                 }
             }
         }
