@@ -1,7 +1,5 @@
-import express from 'express';
-import { pool } from './db.js';
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
+const express = require('express');
+const pool = require('./db.js').pool;
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 require('dotenv').config();
@@ -254,4 +252,4 @@ router.get('/tickets/:person',async(request,response)=>{
     }
 });
 
-export default router;
+module.exports = router;

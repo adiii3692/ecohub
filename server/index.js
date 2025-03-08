@@ -1,11 +1,8 @@
 const express = require('express')
-import cors from 'cors';
-import {createRequire} from 'module';
-const require = createRequire(import.meta.url);
+const cors = require('cors')
 require('dotenv').config();
-import routes from './routes.js';
-import { testConnection } from './db.js';
-
+const routes = require('./routes.js')
+const testConnection = require('./db.js')
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
 const app = express();
@@ -16,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json({limit:'5mb'}));
 
 app.listen(PORT,()=>{
-    testConnection();
+    testConnection.testConnection();
     console.log('Listening to PORT '+PORT);
 });
 
