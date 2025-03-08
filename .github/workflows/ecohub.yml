@@ -24,6 +24,9 @@ jobs:
         with:
           node-version: 23
 
+      - name: Install JDK
+        run: apt-get update && apt-get install -y openjdk-11-jdk
+        
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
         with:
