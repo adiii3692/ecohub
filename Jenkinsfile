@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DB_URL = credentials('DB_URL')
-        PORT = credentials('PORT')
-        VERCEL_TOKEN = credentials('VERCEL_TOKEN')
+        DB_URL = env.DB_URL
+        PORT = env.PORT
+        VERCEL_TOKEN = env.VERCEL_TOKEN
     }
 
     stages {
@@ -49,6 +49,21 @@ pipeline {
                 sh 'docker image ls'
             }
         }
+        
+        stage('Build and Test Backend'){
+            agent{
+                docker{
+                    image 'node:23-alpine'
+                    reuseNode true
+                }
+            }
+            steps{
+                dir('server/'){
+                    sh 'npm i'
+                    sh 'npm test'
+                }
+            }
+        }
 
         stage('Deploy to Vercel') {
             agent{
@@ -62,21 +77,6 @@ pipeline {
                     sh 'vercel --version'
                     sh 'vercel pull --token $VERCEL_TOKEN --yes'
                     sh 'vercel deploy --token ${VERCEL_TOKEN} --prod --confirm --cwd ./'
-                }
-            }
-        }
-        
-        stage('Build and Test Backend'){
-            agent{
-                docker{
-                    image 'node:23-alpine'
-                    reuseNode true
-                }
-            }
-            steps{
-                dir('server/'){
-                    sh 'npm i'
-                    sh 'npm test'
                 }
             }
         }
