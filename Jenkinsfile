@@ -30,7 +30,7 @@ pipeline {
         stage('Build and Install Frontend'){
             agent{
                 docker{
-                    image 'node:18'
+                    image 'node:23-alpine'
                     reuseNode true
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
         stage('Build and Test Backend'){
             agent{
                 docker{
-                    image 'node:18'
+                    image 'node:23-alpine'
                     reuseNode true
                 }
             }
