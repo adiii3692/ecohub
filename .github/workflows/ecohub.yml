@@ -12,14 +12,17 @@ jobs:
   run-jenkinsfile:
     name: Run Jenkins File
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jenkinsci/jenkinsfile-runner:master
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Run Jenkinsfile
-        uses: jenkinsci/jenkinsfile-runner-action@v1
+        uses: jenkinsci/jfr-container-action@master
         with:
-          jenkinsfile: 'Jenkinsfile'
+          command: run
+          jenkinsfile: Jenkinsfile
           pluginstxt: plugins.txt
         env:
           DB_URL: ${{secrets.DATABASE_URL}}
