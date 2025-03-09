@@ -1,4 +1,4 @@
-name: Ecohub Workflow
+name: Personal Diary
 
 on:
   push:
@@ -9,48 +9,64 @@ on:
       - master
 
 jobs:
-  run-jenkinsfile:
-    name: Run Jenkins File
+  server-test:
+    name: Ecohub Server Tests
     runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/jenkinsci/jenkinsfile-runner:latest
+    defaults:
+      run:
+        working-directory:  ./server
+    
+    strategy:
+      matrix:
+        node-version: [21.7.3]
+    
     environment: prod
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Use Node.js v21.7.3
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-
-      - name: Install JDK and Unzip
-        run: apt-get update && apt-get install -y openjdk-11-jdk unzip
-
-      - name: Download and Verify Jenkins WAR file
-        run: |
-          mkdir -p /app/jenkins
-          echo "Downloading Jenkins WAR file..."
-          wget https://get.jenkins.io/war-stable/latest/jenkins.war -O /app/jenkins/jenkins.war
-          if [ $? -ne 0 ]; then
-            echo "Error: Failed to download Jenkins WAR file."
-            exit 1
-          fi
-          echo "Verifying Jenkins WAR file..."
-          unzip -t /app/jenkins/jenkins.war
-          if [ $? -ne 0 ]; then
-            echo "Error: Jenkins WAR file is corrupted or invalid."
-            exit 1
-          fi
-          echo "Jenkins WAR file downloaded and verified successfully."
-
-      - name: Run Jenkinsfile
-        uses: jenkinsci/jfr-container-action@master
-        with:
-          command: run
-          jenkinsfile: Jenkinsfile
-          pluginstxt: plugins.txt
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Test API endpoints
         env:
           DB_URL: ${{secrets.DATABASE_URL}}
           PORT: ${{secrets.PORT}}
-          VERCEL_TOKEN: ${{secrets.VERCEL_TOKEN}}
+        run: npm test
+
+  client-test:
+    name: Ecohub Client Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory:  ./client
+    
+    strategy:
+      matrix:
+        node-version: [21.7.3]
+    
+    environment: prod
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js v21.7.3
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Start Client
+        env:
+          VITE_BASE_URL: ${{secrets.VITE_BASE_URL}}
+        run: npm run dev
+      
+      - name: Run Cypress Tests
+        run: npx cypress run
