@@ -27,19 +27,15 @@ jobs:
       - name: Install JDK
         run: apt-get update && apt-get install -y openjdk-11-jdk
 
-      - name: Validate Jenkinsfile and plugins.txt
+      - name: Verify Jenkins WAR file
         run: |
-          echo "Validating Jenkinsfile and plugins.txt..."
-          if [ ! -f "Jenkinsfile" ]; then
-            echo "Error: Jenkinsfile not found!"
+          if [ ! -f "/app/jenkins/jenkins.war" ]; then
+            echo "Error: Jenkins WAR file not found at /app/jenkins/jenkins.war"
             exit 1
           fi
-          if [ ! -f "plugins.txt" ]; then
-            echo "Error: plugins.txt not found!"
-            exit 1
-          fi
-          echo "Validation successful."
-          
+          echo "Jenkins WAR file exists."
+          unzip -t /app/jenkins/jenkins.war
+
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
         with:
