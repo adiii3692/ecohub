@@ -27,19 +27,22 @@ jobs:
       - name: Install JDK
         run: apt-get update && apt-get install -y openjdk-11-jdk
 
-      - name: Download Jenkins WAR file
+      - name: Download and Verify Jenkins WAR file
         run: |
           mkdir -p /app/jenkins
+          echo "Downloading Jenkins WAR file..."
           wget https://get.jenkins.io/war-stable/latest/jenkins.war -O /app/jenkins/jenkins.war
-          
-      - name: Verify Jenkins WAR file
-          run: |
-            if [ ! -f "/app/jenkins/jenkins.war" ]; then
-              echo "Error: Jenkins WAR file not found at /app/jenkins/jenkins.war"
-              exit 1
-            fi
-            echo "Jenkins WAR file exists."
-            unzip -t /app/jenkins/jenkins.war
+          if [ $? -ne 0 ]; then
+            echo "Error: Failed to download Jenkins WAR file."
+            exit 1
+          fi
+          echo "Verifying Jenkins WAR file..."
+          unzip -t /app/jenkins/jenkins.war
+          if [ $? -ne 0 ]; then
+            echo "Error: Jenkins WAR file is corrupted or invalid."
+            exit 1
+          fi
+          echo "Jenkins WAR file downloaded and verified successfully."
 
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
