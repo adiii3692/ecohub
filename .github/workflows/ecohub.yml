@@ -1,6 +1,9 @@
 name: Personal Diary
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches:
       - master
@@ -35,3 +38,32 @@ jobs:
           DB_URL: ${{secrets.DATABASE_URL}}
           PORT: ${{secrets.PORT}}
         run: npm test
+
+  client-test:
+    name: Ecohub Client Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory:  ./client
+    
+    strategy:
+      matrix:
+        node-version: [21.7.3]
+    
+    environment: prod
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js v21.7.3
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Start Client and Run Cypress Tests
+        env:
+          VITE_BASE_URL: ${{secrets.VITE_BASE_URL}}
+        run: npm run dev & npx cypress run
