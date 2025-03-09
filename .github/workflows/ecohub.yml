@@ -26,13 +26,16 @@ jobs:
 
       - name: Install JDK
         run: apt-get update && apt-get install -y openjdk-11-jdk
-        
+
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
         with:
           command: run
           jenkinsfile: Jenkinsfile
-          pluginstxt: plugins.txt
+          plugins:
+            - artifactId: git
+              source:
+                version: latest
         env:
           DB_URL: ${{secrets.DATABASE_URL}}
           PORT: ${{secrets.PORT}}

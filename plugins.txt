@@ -94,7 +94,6 @@ plain-credentials
 plugin-util-api
 pubsub-light
 resource-disposer
-scm-api
 script-security
 snakeyaml-api
 sse-gateway
