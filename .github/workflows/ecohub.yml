@@ -22,11 +22,24 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 20
 
       - name: Install JDK
         run: apt-get update && apt-get install -y openjdk-11-jdk
 
+      - name: Validate Jenkinsfile and plugins.txt
+        run: |
+          echo "Validating Jenkinsfile and plugins.txt..."
+          if [ ! -f "Jenkinsfile" ]; then
+            echo "Error: Jenkinsfile not found!"
+            exit 1
+          fi
+          if [ ! -f "plugins.txt" ]; then
+            echo "Error: plugins.txt not found!"
+            exit 1
+          fi
+          echo "Validation successful."
+          
       - name: Run Jenkinsfile
         uses: jenkinsci/jfr-container-action@master
         with:
