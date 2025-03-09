@@ -24,8 +24,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install JDK
-        run: apt-get update && apt-get install -y openjdk-11-jdk
+      - name: Install JDK and Unzip
+        run: apt-get update && apt-get install -y openjdk-11-jdk unzip
 
       - name: Download and Verify Jenkins WAR file
         run: |
