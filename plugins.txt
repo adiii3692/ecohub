@@ -7,10 +7,6 @@ git
 github-api
 github-branch-source
 github
-json-api
-json-path-api
-junit
-ldap
 nodejs
 pipeline-build-step
 pipeline-github-lib
