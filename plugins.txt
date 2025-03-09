@@ -15,9 +15,6 @@ pipeline-graph-view
 pipeline-groovy-lib
 pipeline-input-step
 pipeline-milestone-step
-pipeline-model-api
-pipeline-model-definition
-pipeline-model-extensions
 pipeline-stage-step
 pipeline-stage-tags-metadata
 plain-credentials
