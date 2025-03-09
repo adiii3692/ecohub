@@ -32,10 +32,7 @@ jobs:
         with:
           command: run
           jenkinsfile: Jenkinsfile
-          plugins:
-            - artifactId: git
-              source:
-                version: latest
+          pluginstxt: plugins.txt
         env:
           DB_URL: ${{secrets.DATABASE_URL}}
           PORT: ${{secrets.PORT}}
